@@ -1,0 +1,375 @@
+:root {
+    color-scheme: light;
+    --bg: #efe6d6;
+    --surface: #fffdf8;
+    --ink: #241c15;
+    --muted: #6e655c;
+    --line: #e4d9c8;
+    --accent: #1d6b45;
+    --accent-dark: #145236;
+    --danger: #8d2f2a;
+    --toast: #3c2422;
+    --shadow: 0 16px 40px rgba(68, 44, 18, 0.08);
+    --radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), transparent 32%),
+        var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.45;
+}
+
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+.wrap {
+    width: min(1040px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2.25rem 0 3rem;
+}
+
+.page-header h1,
+.panel h2 {
+    margin: 0;
+    letter-spacing: -0.03em;
+}
+
+.page-header h1 {
+    font-size: clamp(2rem, 1.4rem + 2vw, 2.8rem);
+}
+
+.eyebrow {
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.lede,
+.section-heading p {
+    margin: 0.45rem 0 0;
+    color: var(--muted);
+}
+
+.panel {
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.panel h2 {
+    font-size: 1.2rem;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 0.85rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 1rem;
+    margin-top: 1rem;
+}
+
+label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 0.68rem 0.75rem;
+    background: #fff;
+    border: 1px solid #d8cebf;
+    border-radius: 10px;
+}
+
+input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: transparent;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.primary,
+.sell,
+.pager button {
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.primary,
+.sell {
+    background: var(--accent);
+    color: #f6fff9;
+    font-weight: 700;
+}
+
+.primary {
+    padding: 0.72rem 1.1rem;
+}
+
+.sell {
+    padding: 0.5rem 0.85rem;
+}
+
+.primary:hover,
+.sell:hover,
+.pager button:hover {
+    background: var(--accent-dark);
+}
+
+.primary:disabled,
+.sell:disabled,
+.pager button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption.sr-only,
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+th,
+td {
+    padding: 0.8rem 0.45rem;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--line);
+}
+
+th {
+    color: var(--muted);
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.sku {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92rem;
+}
+
+.stock.is-empty {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.stock.is-updated {
+    border-radius: 6px;
+    animation: stock-flash 700ms ease;
+}
+
+.sell-controls {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+}
+
+.sell-controls input {
+    width: 5.4rem;
+    padding: 0.48rem 0.55rem;
+}
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+}
+
+.pager {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0.9rem;
+}
+
+.pager[hidden] {
+    display: none;
+}
+
+.pager button {
+    padding: 0.45rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--line);
+}
+
+.pager button:hover {
+    color: #f6fff9;
+}
+
+.toasts {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    z-index: 20;
+    display: grid;
+    gap: 0.55rem;
+    width: min(28rem, calc(100% - 2rem));
+    transform: translateX(-50%);
+}
+
+.toast {
+    padding: 0.85rem 0.95rem;
+    color: #fff8f5;
+    background: var(--toast);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    animation: toast-in 160ms ease-out;
+}
+
+.toast-out {
+    animation: toast-out 160ms ease-in forwards;
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes toast-out {
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes stock-flash {
+    from {
+        background: #d7f3e3;
+    }
+
+    to {
+        background: transparent;
+    }
+}
+
+@media (max-width: 720px) {
+    .form-grid,
+    .section-heading {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .primary {
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        margin-bottom: 0.75rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.55rem 0;
+        border: 0;
+    }
+
+    td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    td.empty {
+        display: block;
+        text-align: center;
+    }
+
+    td.empty::before {
+        content: none;
+    }
+
+    .sell-controls input {
+        width: 5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast,
+    .toast-out,
+    .stock.is-updated {
+        animation: none;
+    }
+}
